@@ -73,7 +73,7 @@ public class MainInterface extends JFrame {
         try {
             String delta = deltaField.getText().trim();
             String levels = levelField.getText().trim();
-            String cmd = "python ../python_core/process_image.py " + levels + " " + delta;
+            String cmd = "python python_core/process_image.py " + levels + " " + delta;
 
             statusLabel.setText("Traitement en cours…");
 
@@ -82,8 +82,13 @@ public class MainInterface extends JFrame {
 
             statusLabel.setText("Transformée terminée !");
 
-            BufferedImage outputImg = ImageIO.read(new File("shared/output.png"));
-            imagePanel.setImage(outputImg);
+            File outputFile = new File("shared/output.png");
+            if (outputFile.exists()) {
+                BufferedImage outputImg = ImageIO.read(outputFile);
+                imagePanel.setImage(outputImg);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erreur : output.png introuvable !");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             statusLabel.setText("Erreur lors du traitement");
