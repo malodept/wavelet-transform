@@ -70,10 +70,15 @@ plt.savefig("shared/coeffs.png")
 plt.close()
 
 # Mesures quantitatives
-mse = np.mean((output_base - output_masked) ** 2)
+mse = np.mean((img_array - output_base.astype(float)) ** 2)
+mse2 = np.mean((img_array - output_masked.astype(float)) ** 2)
 psnr = float('inf') if mse == 0 else 20 * np.log10(255.0 / np.sqrt(mse))
+psnr2 = float('inf') if mse == 0 else 20 * np.log10(255.0 / np.sqrt(mse2))
+
 
 with open("shared/metrics.txt", "w") as f:
     f.write(f"MSE: {mse:.4f}\n")
+    f.write(f"MSE rectangle: {mse2:.4f}\n")
     f.write(f"PSNR: {psnr:.2f} dB\n")
+    f.write(f"PSNR rectangle: {psnr2:.2f} dB\n")
     f.write(f"Entropie: {H:.4f} bits\n")

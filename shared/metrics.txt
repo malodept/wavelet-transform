@@ -1,0 +1,5 @@
+MSE: 7.5303
+MSE rectangle: 13.8864
+PSNR: 39.36 dB
+PSNR rectangle: 36.70 dB
+Entropie: 2.0492 bits
